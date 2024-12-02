@@ -8,6 +8,7 @@ export const useGenreStore = defineStore('genre', () => {
   });
 
   const genres = computed(() => state.genres);
+  
   const getGenreName = (id) =>
     state.genres.find((genre) => genre.id === id).name;
 
