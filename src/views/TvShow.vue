@@ -110,7 +110,7 @@ onMounted(async () => {
   & p > span {
     font-size: 1.2rem;
     font-weight: 600;
-    border: 4px solid var(--cor-verde);
+    border: 4px solid var(--vt-c-black);
     padding: .7rem .5rem;
     border-radius: 100%;
   }

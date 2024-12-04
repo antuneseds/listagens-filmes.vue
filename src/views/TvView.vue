@@ -36,7 +36,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 </script>
 
 <template>
-    <h1>Programas de TV</h1>
+    <h1 class="programa">Programas de TV</h1>
     
     <main class="corpo">
       <ul class="genre-list">
@@ -68,8 +68,8 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 </template>
   
 <style scoped>
-h1 {
-  margin: 1rem 0 0 1rem;
+.programa {
+  text-align: center;
 }
 
 
@@ -84,10 +84,10 @@ h1 {
 }
 
 .genre-item {
-  background-color: var(--cor-azul);
+  background-color: var(--vt-c-black);
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  color: var(--vt-c-black);
+  color: #fff;
 }
 
 .genre-item:hover {
@@ -141,10 +141,10 @@ h1 {
 }
 
 .tv-genres span {
-  background-color: var(--cor-azul);
+  background-color: var(--vt-c-black);
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
-  color: var(--vt-c-black);
+  color: #fff;
   font-size: 0.8rem;
   font-weight: bold;
 }

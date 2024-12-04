@@ -29,4 +29,28 @@
     "vite": "^5.4.10",
     "vite-plugin-vue-devtools": "^7.5.4"
   }
+
+  
 }
+
+/*{
+  "dependencies": {
+    "swiper": "^10.0.0",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/compiler-sfc": "^3.2.45",
+    "vite": "^4.0.4"
+  },
+  "license": "MIT",
+  "name": "swiper-vue-scrollbar",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "start": "vite"
+  },
+  "tags": [
+    "swiper"
+  ]
+}*/

@@ -110,7 +110,7 @@ onMounted(async () => {
   & p > span {
     font-size: 1.2rem;
     font-weight: 600;
-    border: 4px solid var(--cor-verde);
+    border: 4px solid var(--vt-c-black);
     padding: .7rem .5rem;
     border-radius: 100%;
   }
@@ -132,21 +132,6 @@ onMounted(async () => {
     font-weight: 600;    
   }
 }
-
-/* .criador {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
-
-  & div > h6 {
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-
-  & div > p {
-    font-size: .8rem;
-  }
-} */
 
 .status {
 margin: 1rem 0;
