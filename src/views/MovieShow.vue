@@ -1,64 +1,70 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import api from '@/plugins/axios';
+import { ref, onMounted } from 'vue'
+import api from '@/plugins/axios'
 
-const props = defineProps(['id']);
-const movieDetails = ref({});
+const props = defineProps(['id'])
+const movieDetails = ref({})
 const anoLancamento = ref('')
 
 const showMovie = async (movieId) => {
   const response = await api.get(`movie/${movieId}`, {
     params: {
       series_id: movieId,
-      language: 'pt-BR'
-    }
-  });
-  movieDetails.value = response.data;
-  anoLancamento.value = (movieDetails.value.release_date).slice(0, 4)
+      language: 'pt-BR',
+    },
+  })
+  movieDetails.value = response.data
+  anoLancamento.value = movieDetails.value.release_date.slice(0, 4)
 }
 
 onMounted(async () => {
-  await showMovie(props.id); 
-});
-
+  await showMovie(props.id)
+})
 </script>
 
 <template>
+  <main class="corpo">
+    <img
+      class="poster"
+      :src="`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`"
+      alt="Poster do Filme"
+    />
 
-    <main class="corpo">
-      <img class="poster" :src="`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`" alt="Poster do Filme">
+    <section class="informacoes">
+      <div class="cabecalho">
+        <h1>
+          {{ movieDetails.title }} <span>({{ anoLancamento }})</span>
+        </h1>
+        <p>{{ (movieDetails.genres || []).map((genre) => genre.name).join(', ') }}</p>
+      </div>
 
-      <section class="informacoes">
-        <div class="cabecalho">
-          <h1>{{ movieDetails.title }} <span>({{ anoLancamento }})</span></h1>
-          <p>{{ (movieDetails.genres || []).map(genre => genre.name).join(', ') }}</p>
-        </div>
+      <div class="avaliacao">
+        <p>
+          <span>{{ Math.floor(movieDetails.vote_average * 10) + '%' }}</span>
+        </p>
+        <p>Avaliação</p>
+      </div>
 
-        <div class="avaliacao">
-          <p><span>{{ Math.floor(movieDetails.vote_average * 10) + '%' }}</span></p>
-          <p>Avaliação</p>
-        </div>
+      <div class="sinopse" v-if="movieDetails.overview">
+        <h5>{{ movieDetails.tagline }}</h5>
+        <h2>Sinopse</h2>
+        <p>{{ movieDetails.overview }}</p>
+      </div>
 
-        <div class="sinopse" v-if="movieDetails.overview">
-          <h5>{{ movieDetails.tagline }}</h5>
-          <h2>Sinopse</h2>
-          <p>{{ movieDetails.overview }}</p>
-        </div>
-        
-        <!-- <div class="criador">
+      <!-- <div class="criador">
           <div v-for="creator in movieDetails.created_by || []" :key="creator.id">
             <h6>{{ creator.name }}</h6>
             <p>Criador(a)</p>
           </div>
         </div> -->
 
-        <div class="status">
-          <h6>Status:</h6>
-          <p v-if="movieDetails.in_production">Em produção</p>
-          <p v-else>Finalizado</p>
-        </div>
-      </section>     
-    </main>
+      <div class="status">
+        <h6>Status:</h6>
+        <p v-if="movieDetails.in_production">Em produção</p>
+        <p v-else>Finalizado</p>
+      </div>
+    </section>
+  </main>
 </template>
 
 <style scoped>
@@ -111,7 +117,7 @@ onMounted(async () => {
     font-size: 1.2rem;
     font-weight: 600;
     border: 4px solid var(--vt-c-black);
-    padding: .7rem .5rem;
+    padding: 0.7rem 0.5rem;
     border-radius: 100%;
   }
 
@@ -129,12 +135,12 @@ onMounted(async () => {
   }
 
   & h2 {
-    font-weight: 600;    
+    font-weight: 600;
   }
 }
 
 .status {
-margin: 1rem 0;
+  margin: 1rem 0;
 
   & h6 {
     font-size: 1.1rem;

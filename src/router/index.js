@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
@@ -15,7 +15,7 @@ const routes = [
     path: '/filmes/:id',
     name: 'filme',
     component: () => import('../views/MovieShow.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/tv',
@@ -26,13 +26,13 @@ const routes = [
     path: '/tv/:id',
     name: 'tv',
     component: () => import('../views/TvShow.vue'),
-    props: true
-  }
-];
+    props: true,
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
+})
 
-export default router;
+export default router

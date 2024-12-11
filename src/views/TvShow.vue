@@ -1,64 +1,70 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import api from '@/plugins/axios';
+import { ref, onMounted } from 'vue'
+import api from '@/plugins/axios'
 
-const props = defineProps(['id']);
-const tvDetails = ref({});
+const props = defineProps(['id'])
+const tvDetails = ref({})
 const anoLancamento = ref('')
 
 const showTvShow = async (tvId) => {
   const response = await api.get(`tv/${tvId}`, {
     params: {
       series_id: tvId,
-      language: 'pt-BR'
-    }
-  });
-  tvDetails.value = response.data;
-  anoLancamento.value = (tvDetails.value.first_air_date).slice(0, 4)
+      language: 'pt-BR',
+    },
+  })
+  tvDetails.value = response.data
+  anoLancamento.value = tvDetails.value.first_air_date.slice(0, 4)
 }
 
 onMounted(async () => {
-  await showTvShow(props.id); 
-});
-
+  await showTvShow(props.id)
+})
 </script>
 
 <template>
+  <main class="corpo">
+    <img
+      class="poster"
+      :src="`https://image.tmdb.org/t/p/w500${tvDetails.poster_path}`"
+      alt="Poster do Programa de TV"
+    />
 
-    <main class="corpo">
-      <img class="poster" :src="`https://image.tmdb.org/t/p/w500${tvDetails.poster_path}`" alt="Poster do Programa de TV">
+    <section class="informacoes">
+      <div class="cabecalho">
+        <h1>
+          {{ tvDetails.name }} <span>({{ anoLancamento }})</span>
+        </h1>
+        <p>{{ (tvDetails.genres || []).map((genre) => genre.name).join(', ') }}</p>
+      </div>
 
-      <section class="informacoes">
-        <div class="cabecalho">
-          <h1>{{ tvDetails.name }} <span>({{ anoLancamento }})</span></h1>
-          <p>{{ (tvDetails.genres || []).map(genre => genre.name).join(', ') }}</p>
-        </div>
+      <div class="avaliacao">
+        <p>
+          <span>{{ Math.floor(tvDetails.vote_average * 10) + '%' }}</span>
+        </p>
+        <p>Avaliação</p>
+      </div>
 
-        <div class="avaliacao">
-          <p><span>{{ Math.floor(tvDetails.vote_average * 10) + '%' }}</span></p>
-          <p>Avaliação</p>
-        </div>
+      <div class="sinopse" v-if="tvDetails.overview">
+        <h5>{{ tvDetails.tagline }}</h5>
+        <h2>Sinopse</h2>
+        <p>{{ tvDetails.overview }}</p>
+      </div>
 
-        <div class="sinopse" v-if="tvDetails.overview">
-          <h5>{{ tvDetails.tagline }}</h5>
-          <h2>Sinopse</h2>
-          <p>{{ tvDetails.overview }}</p>
+      <div class="criador">
+        <div v-for="creator in tvDetails.created_by || []" :key="creator.id">
+          <h6>{{ creator.name }}</h6>
+          <p>Criador(a)</p>
         </div>
-        
-        <div class="criador">
-          <div v-for="creator in tvDetails.created_by || []" :key="creator.id">
-            <h6>{{ creator.name }}</h6>
-            <p>Criador(a)</p>
-          </div>
-        </div>
+      </div>
 
-        <div class="status">
-          <h6>Status:</h6>
-          <p v-if="tvDetails.in_production">Em produção</p>
-          <p v-else>Finalizado</p>
-        </div>
-      </section>     
-    </main>
+      <div class="status">
+        <h6>Status:</h6>
+        <p v-if="tvDetails.in_production">Em produção</p>
+        <p v-else>Finalizado</p>
+      </div>
+    </section>
+  </main>
 </template>
 
 <style scoped>
@@ -111,7 +117,7 @@ onMounted(async () => {
     font-size: 1.2rem;
     font-weight: 600;
     border: 4px solid var(--vt-c-black);
-    padding: .7rem .5rem;
+    padding: 0.7rem 0.5rem;
     border-radius: 100%;
   }
 
@@ -129,7 +135,7 @@ onMounted(async () => {
   }
 
   & h2 {
-    font-weight: 600;    
+    font-weight: 600;
   }
 }
 
@@ -144,7 +150,7 @@ onMounted(async () => {
   }
 
   & div > p {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 

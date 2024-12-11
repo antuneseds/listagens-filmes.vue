@@ -3,8 +3,8 @@
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
-  --vt-pink-escuro: #F272A1;
-  --vt-pink-claro: #F299B1;
+  --vt-pink-escuro: #f272a1;
+  --vt-pink-claro: #f299b1;
 
   --vt-c-black: #181818;
   --vt-c-black-soft: #222222;
@@ -49,7 +49,6 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-light-1);
-
   }
 }
 
@@ -95,36 +94,4 @@ html,
 body {
   position: relative;
   height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }

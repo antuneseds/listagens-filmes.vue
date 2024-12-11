@@ -1,38 +1,38 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import api from '@/plugins/axios';
-import Loading from 'vue-loading-overlay';
-import { useGenreStore } from '@/stores/genre';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
+import api from '@/plugins/axios'
+import Loading from 'vue-loading-overlay'
+import { useGenreStore } from '@/stores/genre'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const genreStore = useGenreStore();
-const movies = ref([]);
-const isLoading = ref(false);
+const router = useRouter()
+const genreStore = useGenreStore()
+const movies = ref([])
+const isLoading = ref(false)
 
 onMounted(async () => {
-  isLoading.value = true;
-  await genreStore.getAllGenres('movie');
-  isLoading.value = false;
-});
+  isLoading.value = true
+  await genreStore.getAllGenres('movie')
+  isLoading.value = false
+})
 
 function visualizar(id) {
   router.push(`/filmes/${id}`) //template string
-};
+}
 
 const listMovies = async (genreId) => {
-  isLoading.value = true;
+  isLoading.value = true
   const response = await api.get('discover/movie', {
     params: {
       with_genres: genreId,
-      language: 'pt-BR'
-    }
-  });
+      language: 'pt-BR',
+    },
+  })
   movies.value = response.data.results
-  isLoading.value = false;
-};
+  isLoading.value = false
+}
 
-const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
+const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR')
 </script>
 
 <template>
@@ -40,8 +40,13 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 
   <main class="corpo">
     <ul class="genre-list">
-      <li v-for="genre in genreStore.genres" :key="genre.id" @click="listMovies(genre.id)" class="genre-item">
-        {{ genre.name }} 
+      <li
+        v-for="genre in genreStore.genres"
+        :key="genre.id"
+        @click="listMovies(genre.id)"
+        class="genre-item"
+      >
+        {{ genre.name }}
       </li>
     </ul>
 
@@ -49,8 +54,11 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 
     <div class="movie-list">
       <div v-for="movie in movies" :key="movie.id" class="movie-card">
-              
-        <img @click="visualizar(movie.id)" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title" />
+        <img
+          @click="visualizar(movie.id)"
+          :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+          :alt="movie.title"
+        />
         <div class="movie-details">
           <p @click="visualizar(movie.id)" class="movie-title">{{ movie.title }}</p>
           <p>{{ formatDate(movie.release_date) }}</p>
@@ -60,11 +68,9 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
             </span>
           </p>
         </div>
-              
       </div>
     </div>
   </main>
-  
 </template>
 
 <style scoped>
@@ -75,8 +81,8 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 .genre-list {
   column-gap: 1rem;
   display: flex;
-  flex-direction:row;
-  row-gap: .5rem;
+  flex-direction: row;
+  row-gap: 0.5rem;
   list-style: none;
   margin-top: 3rem;
 }
@@ -124,9 +130,9 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
   font-size: 1.1rem;
   font-weight: bold;
   line-height: normal;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   cursor: pointer;
-}   
+}
 
 .movie-genres {
   display: flex;
@@ -135,7 +141,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
   align-items: flex-start;
   justify-content: center;
   gap: 0.2rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .movie-genres span {

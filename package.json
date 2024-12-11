@@ -15,6 +15,7 @@
     "axios": "^1.7.8",
     "bootstrap": "^5.3.3",
     "pinia": "^2.2.6",
+    "swiper": "^11.1.15",
     "vue": "^3.5.12",
     "vue-loading-overlay": "^6.0.6",
     "vue-router": "^4.4.5"
@@ -29,28 +30,4 @@
     "vite": "^5.4.10",
     "vite-plugin-vue-devtools": "^7.5.4"
   }
-
-  
 }
-
-/*{
-  "dependencies": {
-    "swiper": "^10.0.0",
-    "vue": "^3.2.45"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/compiler-sfc": "^3.2.45",
-    "vite": "^4.0.4"
-  },
-  "license": "MIT",
-  "name": "swiper-vue-scrollbar",
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "start": "vite"
-  },
-  "tags": [
-    "swiper"
-  ]
-}*/
